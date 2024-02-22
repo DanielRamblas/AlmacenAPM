@@ -1,32 +1,30 @@
-import { render } from "@testing-library/react";
-import Display from "./Display"
-import PanelDeBotone from "./PanelDeBotones"
-import { Component } from "react";
-import operaciones from "../logic/operaciones";
-import "./App.css"
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Formulario } from './Formulario'
+import './Formulario.css'
+import { Home } from './Home'
+import { useState } from 'react'
 
 
-class App extends Component {
-  state = {
-    total:null,
-    siguiente:null,
-    operador:null,
-  }
-  handleClick = nombreDeBoton => this.setState(operaciones(this.state, nombreDeBoton))
 
-  render() {
+function App() {
+  const [user, setUser] = useState([])
   return (
-    <div className="component-app">
-      <h1 class="display-1">Inicio</h1>
-      
-      <button type="button" class="btn btn-primary btn-lg">Calculadora basica</button>
-      <Display value={this.state.siguiente || this.state.total || "0"} />
-      <PanelDeBotone clickHandle={this.handleClick} />
-    </div>
-  ); 
-}
+    
+    <div className="App">
+    
+    
+    <header className="header">Fujikuraauto-cmx</header>
+    <div className="container main-content">
+    
+      {
+        !user.length > 0
+          ? <Formulario setUser={setUser} />
+          : <Home user={user} setUser={setUser} />
+          
+      }
   
+    </div>
+    <footer className="footer">Fujikuraauto-cmx</footer>
+    </div>
+  )
 }
-
-export default App;
+export default App
